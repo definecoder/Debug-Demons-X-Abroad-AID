@@ -1,5 +1,5 @@
 .BasicButton{
-    background-color: #FF3D0017;
+    background-color: #85c7d78e;
     color: black;
     font-size: 25px;
     padding: 10px 30px;
@@ -12,8 +12,8 @@
 }
 
 .BasicButton:hover {
-    background-color: rgba(0, 0, 0, 0.56);
-    color: wheat;
+    background-color: rgb(17, 71, 87);
+    color: white;
 }
 
 .form__group {
@@ -85,9 +85,26 @@
   .nameUniRole {
     display: flex;
     flex-direction: column;    
+    justify-content: center;
     align-items: start;
     height: 80%;
     width: 20vw;    
     text-align: justify;
     overflow: hidden;
+  }
+
+  .accuse {
+    color: red;
+  }
+
+  .accuser {
+    color: rgb(0, 34, 255);
+  }
+
+  .ExpertReqCard:hover .accuser{
+    color: rgb(187, 214, 222);
+  }
+
+  .ExpertReqCard:hover .accuse{
+    color: rgb(255, 179, 0);
   }

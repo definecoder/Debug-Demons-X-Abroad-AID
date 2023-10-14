@@ -20,8 +20,8 @@ function BasicButton(props) {
                         <Link to="/expertReq"> EXPERT REQUESTS </Link>
                     </div>
                     
-                    <div className={curPage == 'firms' ? 'activeNavItem' : 'nullll'}>
-                        <Link to="/firms"> REFUND REQUESTS </Link>
+                    <div className={curPage == 'refundReq' ? 'activeNavItem' : 'nullll'}>
+                        <Link to="/refundReq"> REFUND REQUESTS </Link>
                     </div>
                     <div className={curPage == 'logout' ? 'activeNavItem' : 'nullll'}>
                         <Link to="/"> LOG OUT </Link>
