@@ -41,11 +41,41 @@ const createExpert = async (req, res) => {
 
 }
 
-// const getExpert()
+const getExpert = async (id) => {
+    try {
+        const sql = `
+            SELECT * FROM expert
+            WHERE id = ${id}
+        `
+
+        const data = await pool.query(sql)
+
+        return data[0]
+    } catch (err) {
+
+    }
+
+}
+
+const getAllExperts = async () => {
+    try {
+        const sql = `
+            SELECT * FROM expert
+        `
+        const data = await pool.query(sql)
+
+        return data[0]
+
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 
 module.exports = {
-    createExpert
+    createExpert,
+    getExpert,
+    getAllExperts
 }
 
 
