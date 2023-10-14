@@ -34,14 +34,18 @@ const createExpert = async (req, res) => {
         `
         await pool.query(sql)
 
-        res.send('done')
+        res.sendStatus(200);
     } catch (err) {
         console.log(err)
+        res.sendStatus(500);
     }
 
 }
 
-const getExpert = async (id) => {
+const getExpert = async (req, res) => {
+
+    const { id } = req.body;
+
     try {
         const sql = `
             SELECT * FROM expert
@@ -50,24 +54,27 @@ const getExpert = async (id) => {
 
         const data = await pool.query(sql)
 
-        return data[0]
+        res.status(200).json(data[0])
     } catch (err) {
+        console.log(err)
 
+        res.sendStatus(500);
     }
 
 }
 
-const getAllExperts = async () => {
+const getAllExperts = async (req, res) => {
     try {
         const sql = `
             SELECT * FROM expert
         `
         const data = await pool.query(sql)
 
-        return data[0]
+        res.json(data[0]);
 
     } catch (err) {
         console.log(err)
+        res.sendStatus(500);
     }
 }
 
