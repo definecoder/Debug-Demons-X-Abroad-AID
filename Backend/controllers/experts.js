@@ -44,7 +44,7 @@ const createExpert = async (req, res) => {
 
 const getExpert = async (req, res) => {
 
-    const { id } = req.body;
+    const { id } = req.params;
 
     try {
         const sql = `

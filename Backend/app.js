@@ -7,6 +7,13 @@ const app = express();
 
 const authenticateUser = require('./middlewares/auth');
 // routers
+
+const authRouter = require('./routes/auth')
+const aspirantRouter = require('./routes/aspirants')
+const bookingRouter = require('./routes/booking')
+const expertRouter = require('./routes/experts')
+const requestRouter = require('./routes/requests')
+
 // const authRouter = require('./routes/auth');
 // const tasksRouter = require('./routes/tasks');
 // error handler
@@ -21,8 +28,43 @@ app.use(cors());
 // app.use('/api/auth', authRouter);
 // app.use('/api/tasks', authenticateUser, tasksRouter);
 
-const port = process.env.PORT || 8282;
+app.use('/api/aspirants', aspirantRouter)
+app.use('/api/booking', bookingRouter)
+app.use('/api/auth', authRouter)
+app.use('/api/requests', requestRouter)
+app.use('/api/experts', expertRouter)
 
+const port = 8282;
+
+
+// api's
+
+// /api/aspirants/create/
+// /api/aspirants/
+// /api/aspirants/:id 
+
+// /api/experts
+// /api/experts/create
+// /api/experts/:id
+
+// /api/booking/create
+// /api/booking/update/schedule
+// /api/booking/update/status
+// /api/booking/update/review
+// /api/booking/update/rating
+// 
+//
+//
+//
+// 
+// /api/auth
+// 
+// 
+// /api/requests
+// 
+// 
+// 
+// 
 
 app.get('/hi', (req, res) => {
   res.send('hello')

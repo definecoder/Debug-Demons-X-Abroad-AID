@@ -22,7 +22,7 @@ const showRequests = async (req, res) => {
 
     try {
 
-        const { expertID } = req.body
+        const { expertID } = req.params
 
         const sql = `
             SELECT at.name AS aspirant_name
@@ -42,7 +42,7 @@ const showRequests = async (req, res) => {
 const deleteRequest = async (req, res) => {
     try {
 
-        const { requestID } = req.body
+        const { requestID } = req.params
 
         const sql = `
             DELETE FROM requests

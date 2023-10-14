@@ -1,19 +1,19 @@
 const { pool } = require('../db/connect')
-const { getID } = require('../controllers/user')
+const { getAspirantFromEmail } = require('../controllers/aspirant')
 const jwt = require('jsonwebtoken')
 const { escape } = require('mysql2')
 
 
 const login = async (req, res) => {
-    const { email, password } = req.body
+    const { email } = req.body
 
 
-    if (!email || !password) {
+    if (!email) {
         res.json({ msg: 'Please provide email and password' })
     }
 
     //just for demo, normally provided by DB!!!!
-    const id = await getID(email, password)
+    const id = await getAspirantFromEmail(email)
 
     if (id == -1) {
         throw new Error('Invalid email or password')
@@ -30,7 +30,7 @@ const login = async (req, res) => {
 }
 
 
-const adminLogin = (req, res) => {
+const adminLogin = async (req, res) => {
 
     const { email, password } = req.body
 
@@ -38,7 +38,9 @@ const adminLogin = (req, res) => {
         SELECT * FROM admin
         WHERE email = '${email}' AND password = '${password}';
     `
-    const data = pool.query(sql)
+    const data = await pool.query(sql)
+
+    // console.log(data)
 
     if (Object.keys(data[0]).length === 0) {
         res.sendStatus(500);

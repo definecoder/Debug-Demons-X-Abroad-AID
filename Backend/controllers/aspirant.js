@@ -21,7 +21,7 @@ const createAspirant = async (req, res) => {
 
         const sql = `
             INSERT INTO aspirant(name, email, phone, gender, photoLink, currentInstitution, originCountry, destinations, intentedStudyFields, goals, questions, language, intendedSession, scolarshipNeed)
-            VALUES('${name}', '${email}', '${phone}', '${gender}', '${photoLink}', '${currentInstitution}', '${originCountry}', '${destinations}', '${intentedStudyFields}' ,'${goals}', '${questions}', '${language}' ,'${intendedSession}', '${scolarshipNeed}')
+            VALUES('${name}', '${email}', '${phone}', ${gender}, '${photoLink}', '${currentInstitution}', '${originCountry}', '${destinations}', '${intentedStudyFields}' ,'${goals}', '${questions}', '${language}' ,'${intendedSession}', ${scolarshipNeed})
         `
         await pool.query(sql)
 
@@ -50,7 +50,11 @@ const getAllAspirant = async (req, res) => {
 
 const getAspirant = async (req, res) => {
 
-    const { id } = req.body
+
+
+    const { id } = req.params;
+
+    console.log(id)
 
     try {
         const sql = `
@@ -69,12 +73,32 @@ const getAspirant = async (req, res) => {
 
 }
 
+const getAspirantFromEmail = async (email) => {
+
+    try {
+        const sql = `
+            SELECT id FROM aspirant
+            WHERE email = '${email}'
+        `
+        const data = await pool.query(sql)
+
+        if (data[0][0]) {
+            return (data[0][0]).id
+        }
+        else return -1;
+    } catch (err) {
+        console.log(err)
+    }
+
+
+}
 
 
 module.exports = {
     createAspirant,
     getAllAspirant,
-    getAspirant
+    getAspirant,
+    getAspirantFromEmail
 }
 
 

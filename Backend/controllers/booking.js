@@ -3,28 +3,15 @@ const { pool } = require('../db/connect')
 const createBooking = async (req, res) => {
 
     try {
-        const { aspirantID, ExpertID, time } = req.body;
-        if (!time) {
-            const currentDate = new Date();
-            const options = {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-            };
-            const formattedDate = new Intl.DateTimeFormat('en-US', options).format(currentDate);
-            time = formattedDate
-        }
+        let { aspirantID, ExpertID } = req.body;
 
         const status = 0 // applied
         const review = "not given"
         const rating = 0
 
         const sql = `
-        INSERT INTO booking(aspirantID, ExpertID, time, status, review, rating)
-        VALUES('${aspirantID}', '${ExpertID}', '${time}' , '${status}', '${review}', '${rating}')
+        INSERT INTO booking(aspirantID, ExpertID, status, review, rating)
+        VALUES('${aspirantID}', '${ExpertID}', '${status}', '${review}', '${rating}')
         `
         await pool.query(sql)
 
@@ -42,7 +29,7 @@ const updateSchedule = async (req, res) => {
         const { bookingID, time } = req.body;
         const sql = `
             UPDATE booking
-            SET time = '${time}'
+            SET time = ${time}
             WHERE id = ${bookingID}
         `
         await pool.query(sql)
@@ -79,7 +66,7 @@ const changeReview = async (req, res) => {
         const { bookingID, review } = req.body
         const sql = `
             UPDATE booking
-            SET review = ${review}
+            SET review = '${review}'
             WHERE id = ${bookingID}
         `
         await pool.query(sql)
@@ -109,6 +96,9 @@ const changeRating = async (req, res) => {
         res.sendStatus(500);
     }
 }
+
+// const getBookingByExperts;
+// const getBookingByAspirants;
 
 
 module.exports = {
