@@ -1,72 +1,56 @@
 import 'dart:convert';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hack_lu/pages/dashboard.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hack_lu/pages/login_page.dart';
+import 'package:hack_lu/pages/otp.dart';
+//import 'package:hack_lu/models/register_request_model.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 import 'package:snippet_coder_utils/hex_color.dart';
-
-//import '../services/api_service.dart';
-import '../config.dart';
-//import '../models/login_request_model.dart';
+import 'package:email_auth/email_auth.dart';
 import 'package:http/http.dart' as http;
 
+import '../config.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   bool isApiCallProcess = false;
   bool hidePassword = true;
-  GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
-  String? email;
+  static final GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
+  String? userName;
   String? password;
-   late SharedPreferences prefs;
+   String? email;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-  void initSharedPref() async{
-    prefs = await SharedPreferences.getInstance();
-  }
 
-  void loginUser(BuildContext context) async{
-    var reqBody = {
-      "email":email,
-      "password":password
+
+  void RegUser() async {
+    var regBody ={
+      "username": userName,
+      "email": email,
+      "password": password,
     };
-
-    var response = await http.post(Uri.parse(login),
-        headers: {"Content-Type":"application/json"},
-        body: jsonEncode(reqBody)
+    var response = await http.post(Uri.parse(registration),
+        headers: {"Content-type":"application/json"},
+        body: jsonEncode(regBody)
     );
-
 
     var jsonResponse = jsonDecode(response.body);
     print(jsonResponse['status']);
 
     if(jsonResponse['status']){
-      var myToken = jsonResponse['token'];
-      //prefs.setString('token', myToken);
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context)=>HomeDashboard(token: myToken,)));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context)=> LoginPage()));
     }else{
-      print('Something went wrong');
+      print("something went wrong");
     }
 
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
         body: ProgressHUD(
           child: Form(
             key: globalFormKey,
-            child: _loginUI(context),
+            child: _registerUI(context),
           ),
           inAsyncCall: isApiCallProcess,
           opacity: 0.3,
@@ -86,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _loginUI(BuildContext context) {
+  Widget _registerUI(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -105,8 +89,6 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               borderRadius: BorderRadius.only(
-                //topLeft: Radius.circular(100),
-                //topRight: Radius.circular(150),
                 bottomRight: Radius.circular(100),
                 bottomLeft: Radius.circular(100),
               ),
@@ -114,7 +96,6 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-
                 Align(
                   alignment: Alignment.center,
                   child: Image.asset(
@@ -129,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
           const Padding(
             padding: EdgeInsets.only(left: 20, bottom: 30, top: 50),
             child: Text(
-              "Login",
+              "Register",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
@@ -141,22 +122,49 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.only(bottom: 10),
             child: FormHelper.inputFieldWidget(
               context,
-              "Email",
-              "Email",
-
+              //const Icon(Icons.person),
+              "Username",
+              "Username",
               (onValidateVal) {
                 if (onValidateVal.isEmpty) {
-                  return 'email can\'t be empty.';
+                  return 'Username can\'t be empty.';
                 }
 
                 return null;
               },
               (onSavedVal) => {
-                email = onSavedVal,
+                userName = onSavedVal,
               },
               prefixIcon: const Icon(Icons.person),
               initialValue: "",
               obscureText: false,
+              borderFocusColor: Colors.white,
+              prefixIconColor: Colors.white,
+              borderColor: Colors.white,
+              textColor: Colors.white,
+              hintColor: Colors.white.withOpacity(0.7),
+              borderRadius: 10,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: FormHelper.inputFieldWidget(
+              context,
+              //const Icon(Icons.mail),
+              "Email",
+              "Email",
+                  (onValidateVal) {
+                if (onValidateVal.isEmpty) {
+                  return 'Email can\'t be empty.';
+                }
+
+                return null;
+              },
+                  (onSavedVal) => {
+                email = onSavedVal,
+              },
+              prefixIcon: const Icon(Icons.email),
+              initialValue: "",
               borderFocusColor: Colors.white,
               prefixIconColor: Colors.white,
               borderColor: Colors.white,
@@ -204,126 +212,26 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                right: 25,
-              ),
-              child: RichText(
-                text: TextSpan(
-                  style: const TextStyle(color: Colors.grey, fontSize: 14.0),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Forget Password ?',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        decoration: TextDecoration.underline,
-                      ),
-                      recognizer: TapGestureRecognizer()..onTap = () {},
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+
           const SizedBox(
             height: 20,
           ),
           Center(
             child: FormHelper.submitButton(
-              "Login",
+              "Register",
               () {
                 if (validateAndSave()) {
-                    loginUser(context);
+                  RegUser();
                   setState(() {
                     isApiCallProcess = true;
                   });
 
-                  // LoginRequestModel model = LoginRequestModel(
-                  //   email: email,
-                  //   password: password,
-                  // );
-
-                  // APIService.login(model).then(
-                  //   (response) {
-                  //     setState(() {
-                  //       isApiCallProcess = false;
-                  //     });
-                  //
-                  //     if (response) {
-                  //       Navigator.pushNamedAndRemoveUntil(
-                  //         context,
-                  //         '/home',
-                  //         (route) => false,
-                  //       );
-                  //     } else {
-                  //       FormHelper.showSimpleAlertDialog(
-                  //         context,
-                  //         Config.appName,
-                  //         "Invalid Email/Password !!",
-                  //         "OK",
-                  //         () {
-                  //           Navigator.of(context).pop();
-                  //         },
-                  //       );
-                  //     }
-                  //   },
-                  // );
                 }
               },
               btnColor: HexColor("283B71"),
               borderColor: Colors.white,
               txtColor: Colors.white,
               borderRadius: 10,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const Center(
-            child: Text(
-              "OR",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                right: 25,
-              ),
-              child: RichText(
-                text: TextSpan(
-                  style: const TextStyle(color: Colors.white, fontSize: 14.0),
-                  children: <TextSpan>[
-                    const TextSpan(
-                      text: 'Dont have an account? ',
-                    ),
-                    TextSpan(
-                      text: 'Sign up',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.pushNamed(
-                            context,
-                            '/register',
-                          );
-                        },
-                    ),
-                  ],
-                ),
-              ),
             ),
           ),
           const SizedBox(

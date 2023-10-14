@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hack_lu/pages/dashboard.dart';
+import 'package:hack_lu/widgets/profile_cart.dart';
 
 
 import 'pages/login_page.dart';
@@ -9,8 +11,6 @@ Widget _defaultHome = const LoginPage();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Get result of the login function.
 
 
   runApp(const MyApp());
@@ -24,15 +24,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: ThemeData().copyWith(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 17, 71, 87)),
       ),
-      home: const LoginPage(),
-      // routes: {
-      //   '/': (context) => _defaultHome,
-      //   '/login': (context) => const LoginPage(),
-      //   '/register': (context) => const RegisterPage(),
-      // },
+      home: HomeDashboard(),
+     //  routes: {
+     //    '/': (context) => _defaultHome,
+     //    '/login': (context) => const LoginPage(),
+     //    '/register': (context) => const RegisterPage(),
+     //  },
     );
   }
 }
