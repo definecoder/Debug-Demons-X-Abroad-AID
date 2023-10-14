@@ -1,4 +1,3 @@
-import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_lu/data/circuler_image.dart';
 import 'package:hack_lu/data/dummy_profile_data.dart';
@@ -51,7 +50,7 @@ class _BookNowPageState extends State<BookNowPage> {
 
   var imageURL =
       "https://scontent-ccu1-1.xx.fbcdn.net/v/t39.30808-6/280253639_3238644329741905_8497351295383880684_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeG3J1g8iv5a67OOJqXaRx9lWnFQx4tehPNacVDHi16E82KBKL-pUwMEurOG-b2qsNlqq1eKol2KLmGuLjXIog2o&_nc_ohc=3ObCOy7-7RoAX9gNdVi&_nc_ht=scontent-ccu1-1.xx&oh=00_AfAt4cEzsgn6iBeU8cMgnKH3DaCpsBkTB5a87is44iIMdQ&oe=652F8A3E";
-  var name = "Mehraj";
+  var name = "Mehrajul Islam";
   var university = "SUST";
   var state = "Sylhet", country = "Bangladesh";
   var facebookUrl = "https://www.facebook.com/Codermehraj/";
@@ -68,6 +67,31 @@ class _BookNowPageState extends State<BookNowPage> {
   var originInistitution = "Govt. Hazi Mohammad Mohsin College";
   var originCountry = "Bangladesh";
 
+  void showImageDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Container(
+            width: context.width,
+            height: 300,
+            child: Stack(
+              children: [
+                Image.asset("assets/images/bkash.png"),
+                Column(
+                  children: [
+                    150.heightBox,
+                    TextField(),
+                  ],
+                ),
+              ],
+            ), // Replace with your image asset path
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,393 +104,139 @@ class _BookNowPageState extends State<BookNowPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   15.heightBox,
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      30.widthBox,
-                      "Expert Profile"
+                      10.heightBox,
+                      "BOOK YOUR EXPERT"
                           .text
-                          .size(22)
+                          .size(30)
                           .color(Color.fromARGB(255, 71, 87, 100))
                           .fontWeight(FontWeight.bold)
                           .make(),
+                      10.heightBox,
+                      Container(
+                        width: context.width,
+                        child: Text(""),
+                      )
                     ],
                   ),
                   30.heightBox,
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      40.widthBox,
-                      CirculerImage(imageURL, 0.17 * context.width),
-                      30.widthBox,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          name.text
-                              .fontFamily('popins')
-                              .size(22)
-                              .color(Colors.black)
-                              .fontWeight(FontWeight.bold)
-                              .make(),
-                          10.heightBox,
-                          ("Studies in " + university)
-                              .text
-                              .fontFamily('popins')
-                              .size(14)
-                              .color(Colors.black)
-                              .make(),
-                          10.heightBox,
-                          (state + ", " + country)
-                              .text
-                              .fontFamily('popins')
-                              .size(14)
-                              .color(Colors.black)
-                              .make(),
-                          10.heightBox,
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () => _launchURL(facebookUrl),
-                                child: Icon(
-                                  Icons.facebook,
-                                  size: 30,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                              10.widthBox,
-                              FaIcon(
-                                FontAwesomeIcons.whatsapp,
-                                size: 30.0,
-                                color: Colors.green,
-                              ),
-                              10.widthBox,
-                              FaIcon(
-                                FontAwesomeIcons.linkedin,
-                                size: 30.0,
-                                color: Colors.blue,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  CirculerImage(imageURL, 0.17 * context.width),
+                  20.heightBox,
+                  name.text
+                      .size(30)
+                      .color(Color.fromARGB(255, 71, 87, 100))
+                      .fontWeight(FontWeight.bold)
+                      .make(),
                   10.heightBox,
-                  Divider(
-                    color: const Color.fromARGB(255, 26, 22, 22),
-                  ),
-                  5.heightBox,
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(102, 164, 227, 245),
-                      borderRadius: BorderRadius.circular(10),
+                  (degree + ", " + university)
+                      .text
+                      .size(15)
+                      .color(Color.fromARGB(255, 32, 37, 41))
+                      .italic
+                      .make(),
+                  15.heightBox,
+                  (state + ", " + country)
+                      .text
+                      .size(15)
+                      .color(Color.fromARGB(255, 32, 37, 41))
+                      .bold
+                      .make(),
+                  60.heightBox,
+                  ElevatedButton(
+                    onPressed: () {
+                      showImageDialog(context);
+                    },
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all<Color>(
+                          Color.fromARGB(255, 255, 255, 255)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color.fromARGB(
+                              255, 170, 26, 139)), // Button background color
+                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                        EdgeInsets.all(20), // Button padding
+                      ),
+                      textStyle: MaterialStateProperty.all<TextStyle>(
+                        TextStyle(
+                            fontSize: 20,
+                            fontWeight:
+                                FontWeight.bold), // Text style of the button
+                      ),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              20.0), // Button border radius
+                        ),
+                      ),
                     ),
-                    margin: EdgeInsets.all(1),
-                    padding: EdgeInsets.all(15),
-                    width: context.width * .88,
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          //20.widthBox,
-                          const FaIcon(
-                            FontAwesomeIcons.graduationCap,
-                            color: Color.fromARGB(255, 38, 86, 197),
-                            size: 45,
-                          ),
-                          10.widthBox,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              (studyField)
-                                  .text
-                                  .fontFamily('popins')
-                                  .size(13)
-                                  .color(Color.fromARGB(255, 106, 135, 203))
-                                  .fontWeight(FontWeight.bold)
-                                  .make(),
-                              5.heightBox,
-                              "Study Program"
-                                  .text
-                                  .fontFamily('popins')
-                                  .size(20)
-                                  .color(Color.fromARGB(255, 38, 86, 197))
-                                  .fontWeight(FontWeight.bold)
-                                  .make(),
-                              2.heightBox,
-                              Container(
-                                width: context.width * .6,
-                                child: degree.text
-                                    .fontFamily('popins')
-                                    .size(14)
-                                    .italic
-                                    .color(const Color.fromARGB(255, 0, 0, 0))
-                                    .make(),
-                              ),
-                            ],
-                          )
-                        ]),
+                    child: Text('Pay with Bkash'),
                   ),
-                  3.heightBox,
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(102, 164, 227, 245),
-                      borderRadius: BorderRadius.circular(10),
+                  40.heightBox,
+                  ElevatedButton(
+                    onPressed: () {
+                      showImageDialog(context);
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color.fromARGB(
+                              255, 255, 212, 23)), // Button background color
+                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                        EdgeInsets.all(20), // Button padding
+                      ),
+                      textStyle: MaterialStateProperty.all<TextStyle>(
+                        TextStyle(
+                            fontSize: 20,
+                            fontWeight:
+                                FontWeight.bold), // Text style of the button
+                      ),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              20.0), // Button border radius
+                        ),
+                      ),
                     ),
-                    margin: EdgeInsets.all(5),
-                    padding: EdgeInsets.all(15),
-                    width: context.width * .88,
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          //20.widthBox,
-                          const Icon(
-                            Icons.question_mark,
-                            color: Color.fromARGB(255, 38, 86, 197),
-                            size: 55,
-                          ),
-                          5.widthBox,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              "Bio"
-                                  .text
-                                  .fontFamily('popins')
-                                  .size(20)
-                                  .color(Color.fromARGB(255, 38, 86, 197))
-                                  .fontWeight(FontWeight.bold)
-                                  .make(),
-                              10.heightBox,
-                              Container(
-                                width: context.width * .6,
-                                child: bioText.text
-                                    .fontFamily('popins')
-                                    .size(14)
-                                    .italic
-                                    .color(const Color.fromARGB(255, 0, 0, 0))
-                                    .make(),
-                              ),
-                            ],
-                          )
-                        ]),
+                    child: Text('Pay with PayPal'),
                   ),
-                  3.heightBox,
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(102, 164, 227, 245),
-                      borderRadius: BorderRadius.circular(10),
+                  40.heightBox,
+                  ElevatedButton(
+                    onPressed: () {
+                      showImageDialog(context);
+                    },
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all<Color>(
+                          Color.fromARGB(255, 255, 255, 255)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color.fromARGB(
+                              186, 42, 41, 41)), // Button background color
+                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                        EdgeInsets.all(20), // Button padding
+                      ),
+                      textStyle: MaterialStateProperty.all<TextStyle>(
+                        TextStyle(
+                            fontSize: 20,
+                            fontWeight:
+                                FontWeight.bold), // Text style of the button
+                      ),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              20.0), // Button border radius
+                        ),
+                      ),
                     ),
-                    margin: EdgeInsets.all(0),
-                    padding: EdgeInsets.all(15),
-                    width: context.width * .88,
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          //20.widthBox,
-                          const FaIcon(
-                            FontAwesomeIcons.globe,
-                            color: Color.fromARGB(255, 38, 86, 197),
-                            size: 45,
-                          ),
-                          10.widthBox,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              "Origin"
-                                  .text
-                                  .fontFamily('popins')
-                                  .size(20)
-                                  .color(Color.fromARGB(255, 38, 86, 197))
-                                  .fontWeight(FontWeight.bold)
-                                  .make(),
-                              5.heightBox,
-                              Container(
-                                width: context.width * .6,
-                                child: ("I am from " +
-                                        originCountry +
-                                        " and My inistitution was " +
-                                        originInistitution)
-                                    .text
-                                    .fontFamily('popins')
-                                    .italic
-                                    .size(14)
-                                    .color(const Color.fromARGB(255, 0, 0, 0))
-                                    .make(),
-                              ),
-                            ],
-                          )
-                        ]),
-                  ),
-                  7.heightBox,
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(102, 164, 227, 245),
-                      borderRadius: BorderRadius.circular(10),
+                    child: Text(
+                      'Pay with Credit Card',
                     ),
-                    margin: EdgeInsets.all(1),
-                    padding: EdgeInsets.all(15),
-                    width: context.width * .88,
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          //20.widthBox,
-                          const Icon(
-                            Icons.history,
-                            color: Color.fromARGB(255, 38, 86, 197),
-                            size: 45,
-                          ),
-                          10.widthBox,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              "Background"
-                                  .text
-                                  .fontFamily('popins')
-                                  .size(20)
-                                  .color(Color.fromARGB(255, 38, 86, 197))
-                                  .fontWeight(FontWeight.bold)
-                                  .make(),
-                              10.heightBox,
-                              Container(
-                                width: context.width * .6,
-                                child: backgroundText.text
-                                    .fontFamily('popins')
-                                    .size(14)
-                                    .italic
-                                    .color(const Color.fromARGB(255, 0, 0, 0))
-                                    .make(),
-                              ),
-                            ],
-                          )
-                        ]),
                   ),
-                  7.heightBox,
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(102, 164, 227, 245),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    margin: EdgeInsets.all(1),
-                    padding: EdgeInsets.all(15),
-                    width: context.width * .88,
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          //20.widthBox,
-                          const FaIcon(
-                            FontAwesomeIcons.star,
-                            color: Color.fromARGB(255, 38, 86, 197),
-                            size: 45,
-                          ),
-                          10.widthBox,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              "Achievements"
-                                  .text
-                                  .fontFamily('popins')
-                                  .size(20)
-                                  .color(Color.fromARGB(255, 38, 86, 197))
-                                  .fontWeight(FontWeight.bold)
-                                  .make(),
-                              10.heightBox,
-                              Container(
-                                width: context.width * .6,
-                                child: achievementText.text
-                                    .fontFamily('popins')
-                                    .size(14)
-                                    .italic
-                                    .color(const Color.fromARGB(255, 0, 0, 0))
-                                    .make(),
-                              ),
-                            ],
-                          )
-                        ]),
-                  ),
-                  7.heightBox,
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(102, 164, 227, 245),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    margin: EdgeInsets.all(1),
-                    padding: EdgeInsets.all(15),
-                    width: context.width * .88,
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          //20.widthBox,
-                          const FaIcon(
-                            FontAwesomeIcons.funnelDollar,
-                            color: Color.fromARGB(255, 38, 86, 197),
-                            size: 45,
-                          ),
-                          10.widthBox,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              "YOU CAN BOOK PEIVATE SESSION AT"
-                                  .text
-                                  .fontFamily('popins')
-                                  .size(13)
-                                  .color(Color.fromARGB(255, 106, 135, 203))
-                                  .fontWeight(FontWeight.bold)
-                                  .make(),
-                              5.heightBox,
-                              (hourlyrate + "\$ PER HOUR")
-                                  .text
-                                  .fontFamily('popins')
-                                  .size(20)
-                                  .color(Color.fromARGB(255, 38, 86, 197))
-                                  .fontWeight(FontWeight.bold)
-                                  .make(),
-                              2.heightBox,
-                              Container(
-                                width: context.width * .6,
-                                child: ("I earned total " +
-                                        totalEarning +
-                                        "\$ from Abroad Aid")
-                                    .text
-                                    .fontFamily('popins')
-                                    .size(14)
-                                    .italic
-                                    .color(const Color.fromARGB(255, 0, 0, 0))
-                                    .make(),
-                              ),
-                            ],
-                          )
-                        ]),
-                  ),
-                  90.heightBox,
+                  120.heightBox,
                 ],
               ),
             ),
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          print("nice");
-        },
-        elevation: 5,
-        backgroundColor: Color.fromARGB(255, 38, 86, 197),
-        label: "BOOK NOW"
-            .text
-            .color(const Color.fromARGB(255, 255, 255, 255))
-            .make(),
-        icon: Icon(Icons.add, color: Colors.white),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

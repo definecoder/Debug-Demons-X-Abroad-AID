@@ -1,4 +1,3 @@
-import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hack_lu/data/circuler_image.dart';
 import 'package:hack_lu/data/dummy_profile_data.dart';
@@ -80,12 +79,12 @@ class _ProfileState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   15.heightBox,
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      30.widthBox,
                       "Expert Profile"
                           .text
-                          .size(22)
+                          .size(30)
                           .color(Color.fromARGB(255, 71, 87, 100))
                           .fontWeight(FontWeight.bold)
                           .make(),
