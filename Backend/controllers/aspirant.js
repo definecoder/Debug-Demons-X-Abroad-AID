@@ -31,8 +31,6 @@ const createAspirant = async (req, res) => {
     }
 
 }
-
-
 // const deleteAspirant
 
 const getAllAspirant = async () => {
@@ -67,17 +65,6 @@ const getAspirant = async (id) => {
 }
 
 
-// getAllAspirant().then(result => {
-
-// }).catch(err => {
-
-// })
-
-// getAspirant(4).then(dat => {
-
-// }).catch(err => {
-
-// })
 
 module.exports = {
     createAspirant,
