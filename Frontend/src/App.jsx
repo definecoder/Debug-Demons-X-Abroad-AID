@@ -6,9 +6,9 @@ import LoginPage from './pages/loginPage'
 import SignUpPage from './pages/signupPage'
 import HomePage from './pages/HomePage'
 import ProfilePage from './pages/ExpartReqest'
-import MyFirmsPage from './pages/MyFirmsPage'
-import FirmsProfilePage from './pages/FirmsProfilePage'
-import AddNewFirmPage from './pages/AddNewFirm'
+import RefundReq from './pages/RefundReq'
+import ExpertProfilePage from './pages/ExpertProfilePage'
+import RefundInfoPage from './pages/RefundInfoPage'
 import TestAPI from './pages/TestAPI'
 import ExpartReqest from './pages/ExpartReqest'
 
@@ -23,9 +23,9 @@ function App() {
           <Route path="/signup" element = {<SignUpPage />} />
           <Route path="/home" element = {<HomePage />} />
           <Route path="/expertReq" element = {<ExpartReqest />} />
-          <Route path="/firms" element = {<MyFirmsPage />} />
-          <Route path="/firmName" element = {<FirmsProfilePage />} />
-          <Route path="/addFirm" element = {<AddNewFirmPage />} />
+          <Route path="/refundReq" element = {<RefundReq />} />
+          <Route path="/profile/:id" element = {<ExpertProfilePage />} />
+          <Route path="/refund/:refundID" element = {<RefundInfoPage />} />
         </Routes>
       </BrowserRouter>
     </>

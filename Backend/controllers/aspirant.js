@@ -25,31 +25,33 @@ const createAspirant = async (req, res) => {
         `
         await pool.query(sql)
 
-        res.send('done')
+        res.sendStatus(200);
     } catch (err) {
         console.log(err)
+        res.sendStatus(500);
     }
 
 }
-
-
 // const deleteAspirant
 
-const getAllAspirant = async () => {
+const getAllAspirant = async (req, res) => {
     try {
         const sql = `
             SELECT * FROM aspirant
         `
         const data = await pool.query(sql)
 
-        return data[0]
+        return res.status(200).json(data[0])
 
     } catch (err) {
         console.log(err)
     }
 }
 
-const getAspirant = async (id) => {
+const getAspirant = async (req, res) => {
+
+    const { id } = req.body
+
     try {
         const sql = `
             SELECT * FROM aspirant
@@ -58,26 +60,16 @@ const getAspirant = async (id) => {
 
         const data = await pool.query(sql)
 
-        return data[0]
+        return res.status(200).json(data[0])
     } catch (err) {
-
+        console.log(err)
+        res.sendStatus(500);
     }
 
 
 }
 
 
-// getAllAspirant().then(result => {
-
-// }).catch(err => {
-
-// })
-
-// getAspirant(4).then(dat => {
-
-// }).catch(err => {
-
-// })
 
 module.exports = {
     createAspirant,
