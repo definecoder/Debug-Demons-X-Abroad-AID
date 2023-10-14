@@ -23,7 +23,6 @@ const createAspirant = async (req, res) => {
             INSERT INTO aspirant(name, email, phone, gender, photoLink, currentInstitution, originCountry, destinations, intentedStudyFields, goals, questions, language, intendedSession, scolarshipNeed)
             VALUES('${name}', '${email}', '${phone}', '${gender}', '${photoLink}', '${currentInstitution}', '${originCountry}', '${destinations}', '${intentedStudyFields}' ,'${goals}', '${questions}', '${language}' ,'${intendedSession}', '${scolarshipNeed}')
         `
-
         await pool.query(sql)
 
         res.send('done')
@@ -34,7 +33,57 @@ const createAspirant = async (req, res) => {
 }
 
 
-module.exports = {
-    createAspirant
+// const deleteAspirant
+
+const getAllAspirant = async () => {
+    try {
+        const sql = `
+            SELECT * FROM aspirant
+        `
+        const data = await pool.query(sql)
+
+        return data[0]
+
+    } catch (err) {
+        console.log(err)
+    }
 }
+
+const getAspirant = async (id) => {
+    try {
+        const sql = `
+            SELECT * FROM aspirant
+            WHERE id = ${id}
+        `
+
+        const data = await pool.query(sql)
+
+        return data[0]
+    } catch (err) {
+
+    }
+
+
+}
+
+
+// getAllAspirant().then(result => {
+
+// }).catch(err => {
+
+// })
+
+// getAspirant(4).then(dat => {
+
+// }).catch(err => {
+
+// })
+
+module.exports = {
+    createAspirant,
+    getAllAspirant,
+    getAspirant
+}
+
+
 
