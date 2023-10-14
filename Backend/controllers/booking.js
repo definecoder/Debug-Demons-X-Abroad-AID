@@ -37,3 +37,84 @@ const createBooking = async (req, res) => {
 }
 
 
+const updateSchedule = async (req, res) => {
+    try {
+        const { bookingID, time } = req.body;
+        const sql = `
+            UPDATE booking
+            SET time = '${time}'
+            WHERE id = ${bookingID}
+        `
+        await pool.query(sql)
+        res.sendStatus(200)
+
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(500)
+    }
+}
+
+const changeStatus = async (req, res) => {
+
+    try {
+        const { bookingID, status } = req.body;
+
+        const sql = `
+            UPDATE booking
+            SET status = ${status}
+            WHERE id = ${bookingID}
+        `
+        await pool.query(sql)
+        res.sendStatus(200)
+
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+}
+
+const changeReview = async (req, res) => {
+
+    try {
+        const { bookingID, review } = req.body
+        const sql = `
+            UPDATE booking
+            SET review = ${review}
+            WHERE id = ${bookingID}
+        `
+        await pool.query(sql)
+        res.sendStatus(200)
+
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+}
+
+
+const changeRating = async (req, res) => {
+
+    try {
+        const { bookingID, rating } = req.body
+        const sql = `
+            UPDATE booking
+            SET rating = ${rating}
+            WHERE id = ${bookingID}
+        `
+        await pool.query(sql)
+        res.sendStatus(200)
+
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+}
+
+
+module.exports = {
+    createBooking,
+    updateSchedule,
+    changeStatus,
+    changeReview,
+    changeRating
+}
