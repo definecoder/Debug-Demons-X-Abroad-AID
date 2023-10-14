@@ -1,6 +1,7 @@
 const { pool } = require('../db/connect')
 const { getID } = require('../controllers/user')
 const jwt = require('jsonwebtoken')
+const { escape } = require('mysql2')
 
 
 const login = async (req, res) => {
@@ -29,28 +30,27 @@ const login = async (req, res) => {
 }
 
 
-const createUser = async (req, res) => {
+const adminLogin = (req, res) => {
 
-    try {
+    const { email, password } = req.body
 
-        const { name, email, password, address } = req.body
+    const sql = `
+        SELECT * FROM admin
+        WHERE email = '${email}' AND password = '${password}';
+    `
+    const data = pool.query(sql)
 
-        let sql = `
-            INSERT INTO user (name, email, password, address)
-            VALUES("${name}","${email}", "${password}", "${address}")
-        `;
-        await pool.query(sql);
-        res.status(200).send('user added successfully')
+    if (Object.keys(data[0]).length === 0) {
+        res.sendStatus(500);
     }
-    catch (err) {
-        res.status(500).json({ msg: err })
+    else {
+        res.sendStatus(200);
     }
-
 }
 
 
 module.exports = {
-    createUser,
+    adminLogin,
     login
 }
 
