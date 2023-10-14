@@ -6,6 +6,11 @@
     flex-direction: column;
     justify-content: center;
     font-size: .7em;
+    position: fixed;
+}
+
+.dummyNev{
+    width: 20vw;
 }
 
 .navItems {

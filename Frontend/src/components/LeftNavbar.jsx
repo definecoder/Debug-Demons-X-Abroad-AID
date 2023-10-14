@@ -7,6 +7,7 @@ function BasicButton(props) {
 
     return (
       <>
+        <div className='dummyNev'></div>
         <div className='leftNavbar'>
                 <div className='navLogo'>
                     <img src={landingLogo} alt="logo" />
@@ -15,8 +16,8 @@ function BasicButton(props) {
                     <div className={curPage == 'home' ? 'activeNavItem' : 'nullll'}>
                         <Link to="/home"> DASHBOARD </Link>
                     </div>                    
-                    <div className={curPage == 'profile' ? 'activeNavItem' : 'nullll'}>                    
-                        <Link to="/profile"> EXPERT REQUESTS </Link>
+                    <div className={curPage == 'expertReq' ? 'activeNavItem' : 'nullll'}>                    
+                        <Link to="/expertReq"> EXPERT REQUESTS </Link>
                     </div>
                     
                     <div className={curPage == 'firms' ? 'activeNavItem' : 'nullll'}>
