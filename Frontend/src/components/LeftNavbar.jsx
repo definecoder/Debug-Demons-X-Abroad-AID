@@ -16,11 +16,11 @@ function BasicButton(props) {
                         <Link to="/home"> DASHBOARD </Link>
                     </div>                    
                     <div className={curPage == 'profile' ? 'activeNavItem' : 'nullll'}>                    
-                        <Link to="/profile"> PROFILE </Link>
+                        <Link to="/profile"> EXPERT REQUESTS </Link>
                     </div>
                     
                     <div className={curPage == 'firms' ? 'activeNavItem' : 'nullll'}>
-                        <Link to="/firms"> OPTIONS </Link>
+                        <Link to="/firms"> REFUND REQUESTS </Link>
                     </div>
                     <div className={curPage == 'logout' ? 'activeNavItem' : 'nullll'}>
                         <Link to="/"> LOG OUT </Link>

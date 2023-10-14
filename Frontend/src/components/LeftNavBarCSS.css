@@ -1,10 +1,11 @@
 .leftNavbar {
-    width: 25vw;
+    width: 20vw;
     height: 100vh;
     background-color: #D9D9D9;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-size: .7em;
 }
 
 .navItems {
@@ -17,11 +18,11 @@
 }
 
 .navLogo {
-    height: 22vh;
+    height: 27vh;
 }
 
 .navLogo img{
-    width: 20vw;
+    width: 15vw;
 }
 
 .activeNavItem {

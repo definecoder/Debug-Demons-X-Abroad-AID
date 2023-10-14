@@ -14,10 +14,9 @@ function LandingPage() {
         <div>
         <img src={landingLogo} alt="Description of the image" className='LandingLogo'/>  
         </div>        
-        <h1>LANDING PAGE TITLE HERE</h1>
+        <h1>ADMIN PANEL OF ABROAD AID</h1>
         <div className="landingPageButtonContainer">
-            <BasicButton  buttonText = 'LOG IN' onClick = {() => {}} routePath = "/login" />
-            <BasicButton  buttonText = 'REGISTER' onClick = {() => {}} routePath = "/signup" />    
+            <BasicButton  buttonText = 'LOG IN' onClick = {() => {}} routePath = "/login" />            
         </div>
         </div>        
       </>

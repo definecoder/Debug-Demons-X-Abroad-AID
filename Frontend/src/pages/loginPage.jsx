@@ -22,7 +22,7 @@ function LoginPage() {
                     <h2>Emain or Username</h2>
                     <InputTextField inputLabel = 'Enter your email or username' fieldName = 'emailusername'/>
                     <div></div>
-                    <h2 className='passwordTitle'>পাসওয়ার্ড</h2>
+                    <h2 className='passwordTitle'>Password</h2>
                     <PasswordField inputLabel = 'Enter your password' fieldName = 'password'/>                    
                 </div>                
                 <BasicButton  buttonText = 'LOG IN' onClick = {() => {}} routePath = "/home" /> 
