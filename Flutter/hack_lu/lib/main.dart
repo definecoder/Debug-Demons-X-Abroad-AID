@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hack_lu/pages/dashboard.dart';
+import 'package:hack_lu/pages/myBookings.dart';
 import 'package:hack_lu/pages/profile.dart';
 import 'package:hack_lu/widgets/profile_cart.dart';
 
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromARGB(255, 17, 71, 87)),
       ),
-      home: BookNowPage(),
+      home: MyBookingsPage(),
       //  routes: {
       //    '/': (context) => _defaultHome,
       //    '/login': (context) => const LoginPage(),

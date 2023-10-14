@@ -107,7 +107,7 @@ class _BookNowPageState extends State<BookNowPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      10.heightBox,
+                      35.heightBox,
                       "BOOK YOUR EXPERT"
                           .text
                           .size(30)
