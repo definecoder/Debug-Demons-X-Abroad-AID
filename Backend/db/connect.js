@@ -32,7 +32,4 @@ async function checkDatabaseConnection() {
 checkDatabaseConnection();
 
 
-
-
-
 module.exports = { pool }
