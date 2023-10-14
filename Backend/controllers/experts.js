@@ -1,8 +1,6 @@
 const { pool } = require('../db/connect')
 
 
-// 
-
 const createExpert = async (req, res) => {
 
     // id	name	email	phone	gender	photoLink	originCountry	originCollage	country	university	fieldOfStudy	program	session	language	expertise	bio	background	achievements	socialMedia	hourlyCharge	visaPhotoLink	studentIDPhotoLink	locationLink	noOfServiceProvided	totalIncome	isApproved
@@ -43,56 +41,12 @@ const createExpert = async (req, res) => {
 
 }
 
-const req = {
-    body: {}
+// const getExpert()
+
+
+module.exports = {
+    createExpert
 }
-res = {}
-
-createExpert(req, res).then(dat => {
-
-}).catch(err => {
-
-})
-
-// const deleteAspirant
-
-// // const getAllAspirant = async () => {
-// //     try {
-// //         const sql = `
-// //             SELECT * FROM aspirant
-// //         `
-// //         const data = await pool.query(sql)
-
-// //         return data[0]
-
-// //     } catch (err) {
-// //         console.log(err)
-// //     }
-// // }
-
-// // const getAspirant = async (id) => {
-// //     try {
-// //         const sql = `
-// //             SELECT * FROM aspirant
-// //             WHERE id = ${id}
-// //         `
-
-// //         const data = await pool.query(sql)
-
-// //         return data[0]
-// //     } catch (err) {
-
-// //     }
-
-
-// // }
-
-
-// module.exports = {
-//     createAspirant,
-//     getAllAspirant,
-//     getAspirant
-// }
 
 
 
