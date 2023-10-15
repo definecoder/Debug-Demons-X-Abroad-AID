@@ -1,44 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:hack_lu/pages/form/form_three.dart';
 
-class FormTwo extends StatefulWidget {
-  const FormTwo({
-    super.key,
-    required this.exparties,
-
-
-  });
-  final List<String> exparties;
-
+class UserFormTwo extends StatefulWidget {
   @override
-  _FormTwoState createState() => _FormTwoState();
+  _UserFormTwoState createState() => _UserFormTwoState();
 }
 
-class _FormTwoState extends State<FormTwo> {
+class _UserFormTwoState extends State<UserFormTwo> {
   final GlobalKey<FormState> _formKey2 = GlobalKey();
-  String cur_uni = "";
-  String present_country = "";
-  String state = "";
+  String cur_edu = "";
+  String dest_country = "";
+  String goal = "";
   String study_field= "";
-  String degree = "Bsc";
-  String session = "";
+  String question = "Bsc";
+  //String session = "";
   double heighting= 35.0;
 
 
   void _formTwoSubimt() {
-    // print(cur_uni);
-    // print(state);
-    // print(present_country);
-    // print(study_field);
-    // print(degree);
-    // print(session);
-
-    widget.exparties.add(cur_uni);
-    widget.exparties.add(state);
-    widget.exparties.add(present_country);
-    widget.exparties.add(study_field);
-    widget.exparties.add(degree);
-    widget.exparties.add(session);
+    print(cur_edu);
+    print(dest_country);
+    print(goal);
+    print(study_field);
+    print(question);
+    //print(session);
 
   }
 
@@ -58,11 +42,11 @@ class _FormTwoState extends State<FormTwo> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
-                      decoration: InputDecoration(labelText: 'Current University'),
+                      decoration: InputDecoration(labelText: 'Current Education'),
                       onChanged: (value) {
                         setState(() {
-                          cur_uni = value;
-                         // print(value);
+                          cur_edu = value;
+                          // print(value);
                         });
                       },
                     ),
@@ -70,11 +54,11 @@ class _FormTwoState extends State<FormTwo> {
                       height: heighting,
                     ),
                     TextFormField(
-                      decoration: InputDecoration(labelText: 'Country'),
+                      decoration: InputDecoration(labelText: 'Desitnation Country'),
                       onChanged: (value) {
                         setState(() {
-                          present_country = value;
-                        //  print(value);
+                          dest_country = value;
+                          //  print(value);
                         });
                       },
                     ),
@@ -82,10 +66,10 @@ class _FormTwoState extends State<FormTwo> {
                       height: heighting,
                     ),
                     TextFormField(
-                      decoration: InputDecoration(labelText: 'State'),
+                      decoration: InputDecoration(labelText: 'Goal'),
                       onChanged: (value) {
                         setState(() {
-                          state = value;
+                          goal = value;
                           //  print(value);
                         });
                       },
@@ -99,7 +83,7 @@ class _FormTwoState extends State<FormTwo> {
                       onChanged: (value) {
                         setState(() {
                           study_field = value;
-                         // print(value);
+                          // print(value);
                         });
                       },
                     ),
@@ -107,25 +91,15 @@ class _FormTwoState extends State<FormTwo> {
                       height: heighting,
                     ),
                     TextFormField(
-                      decoration: InputDecoration(labelText: 'Degree'),
+                      decoration: InputDecoration(labelText: 'Question'),
                       onChanged: (value) {
                         setState(() {
-                          degree = value;
-                         // print(value);
+                          question = value;
+                          // print(value);
                         });
                       },
                     ),
-                    SizedBox(
-                      height: heighting,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(labelText: 'Session'),
-                      onChanged: (value) {
-                        setState(() {
-                          session = value;
-                        });
-                      },
-                    ),
+
                     SizedBox(
                       height: heighting,
                     ),
@@ -138,15 +112,8 @@ class _FormTwoState extends State<FormTwo> {
                       children: [
                         Spacer(),
                         ElevatedButton(
-                          onPressed: (){
-
-                            _formTwoSubimt();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context)=>FormThree(exparties: widget.exparties,)));
-                          },
-                          child: Text("Next"),
+                          onPressed: _formTwoSubimt,
+                          child: Text("Submit"),
                         ),
                       ],
                     ),

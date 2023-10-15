@@ -10,18 +10,18 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class BookNowPage extends StatefulWidget {
-  const BookNowPage(
+class SchedulePage extends StatefulWidget {
+  const SchedulePage(
       {
       //required this.token ,
       super.key});
 
   //final token;
   @override
-  State<BookNowPage> createState() => _BookNowPageState();
+  State<SchedulePage> createState() => _SchedulePageState();
 }
 
-class _BookNowPageState extends State<BookNowPage> {
+class _SchedulePageState extends State<SchedulePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   void openDrawer() {
@@ -66,6 +66,43 @@ class _BookNowPageState extends State<BookNowPage> {
   var totalEarning = "125";
   var originInistitution = "Govt. Hazi Mohammad Mohsin College";
   var originCountry = "Bangladesh";
+  var clientEmail = "mehraj@gmail.com";
+  var duration = "2";
+  var timeFixed = "PICK A TIME";
+  var dateFixed = "PICK A DATE";
+
+  TimeOfDay selectedTime = TimeOfDay.now();
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (picked != null && picked != selectedTime) {
+      setState(() {
+        selectedTime = picked;
+        timeFixed = selectedTime.format(context);
+      });
+    }
+  }
+
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+        //print(selectedDate);
+        dateFixed = (selectedDate.toString().split(' '))[0];
+      });
+    }
+  }
 
   void showImageDialog(BuildContext context) {
     showDialog(
@@ -108,7 +145,7 @@ class _BookNowPageState extends State<BookNowPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       35.heightBox,
-                      "BOOK YOUR EXPERT"
+                      "FIX YOUR MEETING"
                           .text
                           .size(30)
                           .color(Color.fromARGB(255, 71, 87, 100))
@@ -129,31 +166,31 @@ class _BookNowPageState extends State<BookNowPage> {
                       .color(Color.fromARGB(255, 71, 87, 100))
                       .fontWeight(FontWeight.bold)
                       .make(),
-                  10.heightBox,
-                  (degree + ", " + university)
+                  5.heightBox,
+                  ("EMAIL : " + clientEmail)
                       .text
                       .size(15)
                       .color(Color.fromARGB(255, 32, 37, 41))
                       .italic
                       .make(),
-                  15.heightBox,
-                  (state + ", " + country)
+                  25.heightBox,
+                  ("Duration " + duration + " Hour")
                       .text
-                      .size(15)
-                      .color(Color.fromARGB(255, 32, 37, 41))
+                      .size(25)
+                      .color(Color.fromARGB(255, 39, 143, 172))
                       .bold
                       .make(),
                   60.heightBox,
                   ElevatedButton(
                     onPressed: () {
-                      showImageDialog(context);
+                      _selectTime(context);
                     },
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all<Color>(
                           Color.fromARGB(255, 255, 255, 255)),
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Color.fromARGB(
-                              255, 170, 26, 139)), // Button background color
+                              255, 38, 86, 197)), // Button background color
                       padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                         EdgeInsets.all(20), // Button padding
                       ),
@@ -170,46 +207,19 @@ class _BookNowPageState extends State<BookNowPage> {
                         ),
                       ),
                     ),
-                    child: Text('Pay with Bkash'),
+                    child: Text(timeFixed),
                   ),
                   40.heightBox,
                   ElevatedButton(
                     onPressed: () {
-                      showImageDialog(context);
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromARGB(
-                              255, 255, 212, 23)), // Button background color
-                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                        EdgeInsets.all(20), // Button padding
-                      ),
-                      textStyle: MaterialStateProperty.all<TextStyle>(
-                        TextStyle(
-                            fontSize: 20,
-                            fontWeight:
-                                FontWeight.bold), // Text style of the button
-                      ),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              20.0), // Button border radius
-                        ),
-                      ),
-                    ),
-                    child: Text('Pay with PayPal'),
-                  ),
-                  40.heightBox,
-                  ElevatedButton(
-                    onPressed: () {
-                      showImageDialog(context);
+                      _selectDate(context);
                     },
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all<Color>(
                           Color.fromARGB(255, 255, 255, 255)),
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Color.fromARGB(
-                              186, 42, 41, 41)), // Button background color
+                              255, 38, 86, 197)), // Button background color
                       padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                         EdgeInsets.all(20), // Button padding
                       ),
@@ -226,17 +236,28 @@ class _BookNowPageState extends State<BookNowPage> {
                         ),
                       ),
                     ),
-                    child: Text(
-                      'Pay with Credit Card',
-                    ),
+                    child: Text(dateFixed),
                   ),
-                  120.heightBox,
+                  180.heightBox,
                 ],
               ),
             ),
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          print("nice");
+        },
+        elevation: 5,
+        backgroundColor: Color.fromARGB(255, 38, 86, 197),
+        label: "CONFIRM MEETING"
+            .text
+            .color(const Color.fromARGB(255, 255, 255, 255))
+            .make(),
+        icon: Icon(Icons.alarm, color: Colors.white),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

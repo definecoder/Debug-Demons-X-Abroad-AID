@@ -7,6 +7,7 @@ import InputTextField from "../components/InputTextField";
 import PasswordField from "../components/PasswordField";
 import LeftNavBar from "../components/LeftNavbar";
 import { useParams } from "react-router-dom";
+import ProfileFetcher from "./ProfilePageFetcher";
 
 function ExpertProfilePage() {
   let { id } = useParams();
@@ -26,10 +27,9 @@ function ExpertProfilePage() {
     "https://images.moneycontrol.com/static-mcnews/2023/04/Visa_usa-Photo-by-Molinas-Alvaro-via-Wikimedia-Commons-1.jpg?impolicy=website&width=1600&height=900";
   const studentID =
     "https://64.media.tumblr.com/b9363d40d66f3d06df50d926827441ea/tumblr_n82kr6dQLX1teais2o1_1280.jpg";
-
   return (
     <>
-      <div className="mainCanvas">
+      { <div className="mainCanvas">
         <LeftNavBar curPage="expertReq" />
         <div className="rightCanvasProfile">
           <div className="heroSection">
@@ -74,7 +74,7 @@ function ExpertProfilePage() {
               <BasicButton  buttonText = 'Reject' onClick = {() => {}} routePath = "/home" />
           </div>
         </div>
-      </div>
+      </div> }
     </>
   );
 }
