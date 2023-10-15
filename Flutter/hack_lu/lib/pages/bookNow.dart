@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hack_lu/data/circuler_image.dart';
 import 'package:hack_lu/data/dummy_profile_data.dart';
+import 'package:hack_lu/pages/myBookings.dart';
 import 'package:hack_lu/widgets/main_drawer.dart';
 import 'package:hack_lu/widgets/profile_cart.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -202,7 +203,10 @@ class _BookNowPageState extends State<BookNowPage> {
                   40.heightBox,
                   ElevatedButton(
                     onPressed: () {
-                      showImageDialog(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyBookingsPage()));
                     },
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all<Color>(

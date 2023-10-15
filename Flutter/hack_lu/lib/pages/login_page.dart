@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hack_lu/pages/bookNow.dart';
 import 'package:hack_lu/pages/dashboard.dart';
+import 'package:hack_lu/pages/form/form_one.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
@@ -12,7 +14,6 @@ import 'package:snippet_coder_utils/hex_color.dart';
 import '../config.dart';
 //import '../models/login_request_model.dart';
 import 'package:http/http.dart' as http;
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -27,46 +28,36 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
   String? email;
   String? password;
-   late SharedPreferences prefs;
+  late SharedPreferences prefs;
 
   @override
   void initState() {
     super.initState();
   }
-  void initSharedPref() async{
+
+  void initSharedPref() async {
     prefs = await SharedPreferences.getInstance();
   }
 
-  void loginUser(BuildContext context) async{
-    var reqBody = {
-      "email":email,
-      "password":password
-    };
+  void loginUser(BuildContext context) async {
+    var reqBody = {"email": email, "password": password};
 
     var response = await http.post(Uri.parse(login),
-        headers: {"Content-Type":"application/json"},
-        body: jsonEncode(reqBody)
-    );
-
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(reqBody));
 
     var jsonResponse = jsonDecode(response.body);
     print(jsonResponse['status']);
 
-    if(jsonResponse['status']){
+    if (jsonResponse['status']) {
       var myToken = jsonResponse['token'];
       //prefs.setString('token', myToken);
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context)=>HomeDashboard()));
-    }else{
+          context, MaterialPageRoute(builder: (context) => HomeDashboard()));
+    } else {
       print('Something went wrong');
     }
-
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -114,11 +105,10 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-
                 Align(
                   alignment: Alignment.center,
                   child: Image.asset(
-                    "assets/images/logo.png",
+                    "assets/images/ABROAD AID.png",
                     fit: BoxFit.contain,
                     width: 130,
                   ),
@@ -143,7 +133,6 @@ class _LoginPageState extends State<LoginPage> {
               context,
               "Email",
               "Email",
-
               (onValidateVal) {
                 if (onValidateVal.isEmpty) {
                   return 'email can\'t be empty.';
@@ -233,15 +222,19 @@ class _LoginPageState extends State<LoginPage> {
           Center(
             child: FormHelper.submitButton(
               "Login",
-              () {
-                if (validateAndSave()) {
-                    loginUser(context);
-                  setState(() {
-                    isApiCallProcess = true;
-                  });
+              // () {
+              //   if (validateAndSave()) {
+              //       loginUser(context);
+              //     setState(() {
+              //       isApiCallProcess = true;
+              //     });
 
-                  
-                }
+              //   }
+              // }
+              // ,
+              () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BookNowPage()));
               },
               btnColor: HexColor("283B71"),
               borderColor: Colors.white,

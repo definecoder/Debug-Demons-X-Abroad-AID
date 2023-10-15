@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hack_lu/data/circuler_image.dart';
 import 'package:hack_lu/data/dummy_profile_data.dart';
+import 'package:hack_lu/pages/dashboard.dart';
 import 'package:hack_lu/widgets/main_drawer.dart';
 import 'package:hack_lu/widgets/profile_cart.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -248,6 +249,8 @@ class _SchedulePageState extends State<SchedulePage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           print("nice");
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => HomeDashboard()));
         },
         elevation: 5,
         backgroundColor: Color.fromARGB(255, 38, 86, 197),

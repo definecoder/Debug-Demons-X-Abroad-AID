@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hack_lu/pages/form/form_one.dart';
 
 class MainDrawer extends StatelessWidget {
-   MainDrawer({super.key});
-
-
+  MainDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +13,6 @@ class MainDrawer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DrawerHeader(
-
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -31,15 +29,16 @@ class MainDrawer extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Image.asset("assets/images/ABROAD AID.png",
-                  height: 110,
+                  Image.asset(
+                    "assets/images/ABROAD AID.png",
+                    height: 110,
                   ),
                   const SizedBox(width: 8),
                   Text(
                     'Study Abroad!',
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                   ),
                 ],
               ),
@@ -53,9 +52,9 @@ class MainDrawer extends StatelessWidget {
               title: Text(
                 'Visa Center',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontSize: 16,
-                ),
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 16,
+                    ),
               ),
               onTap: () {},
             ),
@@ -68,9 +67,9 @@ class MainDrawer extends StatelessWidget {
               title: Text(
                 'Scholarship Info',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontSize: 16,
-                ),
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 16,
+                    ),
               ),
               onTap: () {},
             ),
@@ -83,9 +82,9 @@ class MainDrawer extends StatelessWidget {
               title: Text(
                 'Accommodation Info',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontSize: 16,
-                ),
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 16,
+                    ),
               ),
               onTap: () {},
             ),
@@ -98,9 +97,9 @@ class MainDrawer extends StatelessWidget {
               title: Text(
                 'Part Time Job',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontSize: 16,
-                ),
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 16,
+                    ),
               ),
               onTap: () {},
             ),
@@ -113,9 +112,9 @@ class MainDrawer extends StatelessWidget {
               title: Text(
                 'Checklist',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontSize: 16,
-                ),
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 16,
+                    ),
               ),
               onTap: () {},
             ),
@@ -128,9 +127,9 @@ class MainDrawer extends StatelessWidget {
               title: Text(
                 'Ticket Pricing',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontSize: 16,
-                ),
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 16,
+                    ),
               ),
               onTap: () {},
             ),
@@ -143,10 +142,9 @@ class MainDrawer extends StatelessWidget {
               title: Text(
                 'Cost Prediction',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontSize: 16,
-
-                ),
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 16,
+                    ),
               ),
               // shape: RoundedRectangleBorder(
               //   side: BorderSide(color: Colors.black, width: 1),
@@ -157,7 +155,9 @@ class MainDrawer extends StatelessWidget {
             Spacer(),
             Row(
               children: [
-                SizedBox(width: 15,),
+                SizedBox(
+                  width: 15,
+                ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -166,20 +166,32 @@ class MainDrawer extends StatelessWidget {
                     elevation: 5, // elevation of 5
                   ),
                   onPressed: () {
-
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => FormOne()));
                   },
                   child: Text('Become Expert'),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: TextButton(onPressed: (){}, child: Text("Log in", style: TextStyle(
-                    fontSize: 14,
-                    decoration: TextDecoration.underline
-                  ),)),
-                )
+                  padding: const EdgeInsets.all(9.0),
+                  child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Log in",
+                        style: TextStyle(
+                            fontSize: 14, decoration: TextDecoration.underline),
+                      )),
+                ),
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => FormOne()));
+                    },
+                    icon: Icon(
+                      Icons.manage_accounts_rounded,
+                      size: 35,
+                    ))
               ],
             ),
-
             SizedBox(
               height: 15,
             )
