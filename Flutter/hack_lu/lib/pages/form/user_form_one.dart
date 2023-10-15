@@ -1,17 +1,15 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:hack_lu/pages/form/form_four.dart';
 import 'package:hack_lu/pages/form/form_two.dart';
+import 'package:hack_lu/pages/form/user_form_two.dart';
 import 'package:hack_lu/widgets/map_screen.dart';
 
-class FormOne extends StatefulWidget {
+class UserFormOne extends StatefulWidget {
   @override
-  _FormOneState createState() => _FormOneState();
+  _UserFormOneState createState() => _UserFormOneState();
 }
 
-class _FormOneState extends State<FormOne> {
-  final GlobalKey<FormState> _formKey = GlobalKey();
+class _UserFormOneState extends State<UserFormOne> {
+  final GlobalKey<FormState> _formKeyu1 = GlobalKey();
   String name = "";
   String email = "";
   String location = "";
@@ -20,25 +18,13 @@ class _FormOneState extends State<FormOne> {
   String college = "";
   double heighting= 35.0;
   int flag=0;
-  final List<String> expertDatas=[];
 
   void _submit() {
-    // print(name);
-    // print(email);
-    // print(phone);
-    // print(origin_country);
-    // print(college);
-
-    expertDatas.add(name);
-    expertDatas.add(email);
-    expertDatas.add(phone);
-    expertDatas.add("0");
-    expertDatas.add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrZVChHHPaNq7xP7wAxq-ML_BTSAysHyu06Hz7xImRXJ1lFKUApQGaUr8kw-svEvPooWM&usqp=CAU");
-    expertDatas.add(origin_country);
-    expertDatas.add(college);
-    expertDatas.add("Kamal Bazar");
-    expertDatas.add("24.869251, 91.804760");
-
+    print(name);
+    print(email);
+    print(phone);
+    print(origin_country);
+    print(college);
   }
 
   @override
@@ -48,8 +34,9 @@ class _FormOneState extends State<FormOne> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Expert's Personal Information",
-
+        title: Text("Users Personal Information",
+          style: TextStyle(fontSize: 16,
+              fontWeight: FontWeight.bold),
 
         ),
       ),
@@ -60,7 +47,7 @@ class _FormOneState extends State<FormOne> {
 
             children: <Widget>[
               Form(
-                key: _formKey,
+                key: _formKeyu1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -69,7 +56,6 @@ class _FormOneState extends State<FormOne> {
                       onChanged: (value) {
                         setState(() {
                           name = value;
-                          //expertDatas.add(value);
                         });
                       },
                     ),
@@ -81,39 +67,13 @@ class _FormOneState extends State<FormOne> {
                       onChanged: (value) {
                         setState(() {
                           email = value;
-                          //expertDatas.add(value);
                         });
                       },
                     ),
                     SizedBox(
                       height: heighting,
                     ),
-                    contenti,
-                    ElevatedButton(onPressed: (){
 
-                      setState(() {
-                        //expertDatas.add("Kamal Bazar");
-                        //expertDatas.add("24.869251, 91.804760");
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context)=>MapScreen()));
-
-                        contenti= Row(
-                          children: [
-                            Text("Location",  style: TextStyle(fontSize: 12,
-                        fontWeight: FontWeight.bold)),
-                            SizedBox(width: 15,),
-                            Icon(Icons.location_on),
-                            Text("Kamal Bazar (24.869251, 91.804760)")
-                          ],
-                        );
-
-
-                      });
-
-                    },
-                      child: Text("Set Current Location")),
 
                     TextFormField(
                       decoration: InputDecoration(labelText: 'Phone'),
@@ -121,7 +81,6 @@ class _FormOneState extends State<FormOne> {
                       onChanged: (value) {
                         setState(() {
                           phone = value;
-
                         });
                       },
                     ),
@@ -133,7 +92,6 @@ class _FormOneState extends State<FormOne> {
                       onChanged: (value) {
                         setState(() {
                           origin_country = value;
-
                         });
                       },
                     ),
@@ -145,7 +103,6 @@ class _FormOneState extends State<FormOne> {
                       onChanged: (value) {
                         setState(() {
                           college = value;
-
                         });
                       },
                     ),
@@ -158,16 +115,10 @@ class _FormOneState extends State<FormOne> {
                         ElevatedButton(
                           onPressed: (){
                             _submit();
-
-                            // expertDatas.forEach((item) {
-                            //   print(item);
-                            // });
-
-                            //_submit();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context)=>FormFour(exparties: expertDatas,)));
+                                    builder: (context)=>UserFormTwo()));
                           },
                           child: Text("Next"),
                         ),

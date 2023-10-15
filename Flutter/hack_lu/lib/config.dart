@@ -1,6 +1,8 @@
-final url = 'http://192.168.160.183:3000/';
+final url = 'http://192.168.1.100:8282/';
 final registration = url + "register";
-final login = url + "login";
+final login = url + "api/auth/login";
+final formapi = url + "api/aspirants/create";
+final expertApi = url + "api/experts/create";
 // class Config {
 //   static const String appName = "Shopping App";
 //   static const String apiURL = '127.0.0.1:3000'; //PROD_URL
