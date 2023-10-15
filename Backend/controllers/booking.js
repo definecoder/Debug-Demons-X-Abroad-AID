@@ -97,8 +97,42 @@ const changeRating = async (req, res) => {
     }
 }
 
-// const getBookingByExperts;
-// const getBookingByAspirants;
+const getBookingsByExpert = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const sql = `
+            SELECT * FROM booking
+            WHERE ExpertID = ${id}
+        `
+
+        const data = await pool.query(sql)
+        return res.status(200).json(data[0])
+
+    }
+    catch (err) {
+        console.log(err)
+        return res.sendStatus(500);
+    }
+
+
+
+};
+const getBookingsByAspirant = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const sql = `
+            SELECT * FROM booking
+            WHERE aspirantID = ${id}
+        `
+        const data = await pool.query(sql)
+        return res.status(200).json(data[0])
+
+    }
+    catch (err) {
+        console.log(err)
+        return res.sendStatus(500);
+    }
+};
 
 
 module.exports = {
@@ -106,5 +140,8 @@ module.exports = {
     updateSchedule,
     changeStatus,
     changeReview,
-    changeRating
+    changeRating,
+    getBookingsByAspirant,
+    getBookingsByExpert
+
 }

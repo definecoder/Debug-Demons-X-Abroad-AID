@@ -43,26 +43,33 @@ const port = 8282;
 // /api/aspirants/
 // /api/aspirants/:id 
 
-// /api/experts
 // /api/experts/create
+// /api/experts
 // /api/experts/:id
 
-// /api/booking/create
+// /api/auth/login
+// /api/auth/adminLogin
+// /api/auth/adminLogin
+// /api/auth/getuapprovedUsers
+// /api/auth/approveUser
+
+
+
+// /api/booking/create 
 // /api/booking/update/schedule
 // /api/booking/update/status
 // /api/booking/update/review
 // /api/booking/update/rating
-// 
+// /api/booking/update/aspirants
+// /api/booking/update/experts
 //
 //
-//
-// 
-// /api/auth
 // 
 // 
-// /api/requests
 // 
-// 
+// /api/requests/create
+// /api/requests/:id (get)
+// /api/requests/:id (delete)
 // 
 // 
 

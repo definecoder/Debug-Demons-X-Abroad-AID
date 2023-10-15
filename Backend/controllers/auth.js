@@ -6,7 +6,7 @@ const { escape } = require('mysql2')
 
 const login = async (req, res) => {
     const { email } = req.body
-
+    // console.log('api hit')
 
     if (!email) {
         res.json({ msg: 'Please provide email and password' })
@@ -32,7 +32,10 @@ const login = async (req, res) => {
 
 const adminLogin = async (req, res) => {
 
+
     const { email, password } = req.body
+
+    // console.log('api hit')
 
     const sql = `
         SELECT * FROM admin

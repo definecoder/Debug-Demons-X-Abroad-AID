@@ -3,9 +3,10 @@ const router = express.Router()
 
 const authToken = require('../middlewares/auth')
 
-const { createBooking, updateSchedule, changeStatus, changeReview, changeRating } = require('../controllers/booking')
+const { createBooking, updateSchedule, changeStatus, changeReview, changeRating, getBookingsByExpert, getBookingsByAspirant } = require('../controllers/booking')
 
-
+router.route('/experts').get(authToken, getBookingsByExpert)
+router.route('/aspirants').get(authToken, getBookingsByAspirant)
 router.route('/create').post(authToken, createBooking)
 router.route('/update/schedule').put(authToken, updateSchedule)
 router.route('/update/status').put(authToken, changeStatus)
